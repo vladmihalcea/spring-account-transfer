@@ -141,15 +141,15 @@ public class BaseTransferTransactionManagerTest {
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
 
         LOGGER.info("Starting threads");
-        List<Future<Boolean>> futures = executorService.invokeAll(
+        List<Future<Long>> futures = executorService.invokeAll(
             IntStream
                 .range(0, threadCount)
                 .mapToObj(
-                    i -> (Callable<Boolean>) () ->
+                    i -> (Callable<Long>) () ->
                         transferService.transfer("Alice-123", "Bob-456", 5L))
                 .collect(Collectors.toList())
         );
-        for (Future<Boolean> future : futures) {
+        for (Future<Long> future : futures) {
             try {
                 future.get();
             } catch (InterruptedException| ExecutionException e) {

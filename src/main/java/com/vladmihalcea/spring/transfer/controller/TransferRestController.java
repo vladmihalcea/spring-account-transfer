@@ -18,10 +18,10 @@ public class TransferRestController {
     private TransferService transferService;
 
     @PostMapping("/transfer")
-    public void transfer(
+    public long transfer(
         @RequestParam("fromIban") String fromIban,
         @RequestParam("toIban") String toIban,
         @RequestParam("cents") long cents) {
-        transferService.transfer(fromIban, toIban, cents);
+        return transferService.transfer(fromIban, toIban, cents);
     }
 }

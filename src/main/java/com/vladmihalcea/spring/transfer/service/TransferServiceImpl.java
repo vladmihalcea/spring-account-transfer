@@ -17,7 +17,7 @@ public class TransferServiceImpl implements TransferService {
 
     @Override
     @Transactional
-    public boolean transfer(String fromIban, String toIban, long cents) {
+    public long transfer(String fromIban, String toIban, long cents) {
         boolean status = true;
 
         Account fromAccount = accountRepository.findById(fromIban).get();
@@ -31,6 +31,6 @@ public class TransferServiceImpl implements TransferService {
             toAccount.setBalance(toAccount.getBalance() + cents);
         }
 
-        return status;
+        return fromAccount.getBalance();
     }
 }

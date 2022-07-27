@@ -8,5 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface TransferService {
 
-    boolean transfer(String fromIban, String toIban, long cents);
+    long transfer(String fromIban, String toIban, long cents);
 }
