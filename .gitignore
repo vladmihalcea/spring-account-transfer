@@ -6,6 +6,8 @@ target/*
 .attach_pid*
 .idea
 *.iml
+*.log
+*.gz
 /target
 .sts4-cache/
 .vscode/*
