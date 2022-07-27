@@ -1,4 +1,4 @@
-package com.vladmihalcea.spring.transaction.transfer.config;
+package com.vladmihalcea.spring.transfer.config;
 
 import com.vladmihalcea.spring.util.logging.InlineQueryLogEntryCreator;
 import com.zaxxer.hikari.HikariConfig;
@@ -30,10 +30,10 @@ import java.util.Properties;
 @PropertySource({"/META-INF/jdbc-postgresql.properties"})
 @ComponentScan(
     basePackages = {
-        "com.vladmihalcea.spring.transaction.transfer.service",
+        "com.vladmihalcea.spring.transfer.service",
     }
 )
-@EnableJpaRepositories("com.vladmihalcea.spring.transaction.transfer.repository")
+@EnableJpaRepositories("com.vladmihalcea.spring.transfer.repository")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 public class BaseTransferTransactionManagerConfiguration {
@@ -128,7 +128,7 @@ public class BaseTransferTransactionManagerConfiguration {
 
     protected String[] packagesToScan() {
         return new String[]{
-            "com.vladmihalcea.spring.transaction.transfer.domain"
+            "com.vladmihalcea.spring.transfer.domain"
         };
     }
 }

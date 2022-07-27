@@ -1,9 +1,9 @@
-package com.vladmihalcea.spring.transaction.transfer;
+package com.vladmihalcea.spring.transfer;
 
-import com.vladmihalcea.spring.transaction.transfer.config.BaseTransferTransactionManagerConfiguration;
-import com.vladmihalcea.spring.transaction.transfer.domain.Account;
-import com.vladmihalcea.spring.transaction.transfer.repository.AccountRepository;
-import com.vladmihalcea.spring.transaction.transfer.service.TransferService;
+import com.vladmihalcea.spring.transfer.config.BaseTransferTransactionManagerConfiguration;
+import com.vladmihalcea.spring.transfer.domain.Account;
+import com.vladmihalcea.spring.transfer.repository.AccountRepository;
+import com.vladmihalcea.spring.transfer.service.TransferService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

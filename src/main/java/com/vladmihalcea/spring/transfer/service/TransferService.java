@@ -1,4 +1,4 @@
-package com.vladmihalcea.spring.transaction.transfer.service;
+package com.vladmihalcea.spring.transfer.service;
 
 import org.springframework.stereotype.Service;
 

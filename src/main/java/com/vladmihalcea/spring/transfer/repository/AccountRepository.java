@@ -1,6 +1,6 @@
-package com.vladmihalcea.spring.transaction.transfer.repository;
+package com.vladmihalcea.spring.transfer.repository;
 
-import com.vladmihalcea.spring.transaction.transfer.domain.Account;
+import com.vladmihalcea.spring.transfer.domain.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

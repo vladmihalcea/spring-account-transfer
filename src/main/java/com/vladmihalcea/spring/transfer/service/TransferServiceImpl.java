@@ -1,7 +1,7 @@
-package com.vladmihalcea.spring.transaction.transfer.service;
+package com.vladmihalcea.spring.transfer.service;
 
-import com.vladmihalcea.spring.transaction.transfer.domain.Account;
-import com.vladmihalcea.spring.transaction.transfer.repository.AccountRepository;
+import com.vladmihalcea.spring.transfer.domain.Account;
+import com.vladmihalcea.spring.transfer.repository.AccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

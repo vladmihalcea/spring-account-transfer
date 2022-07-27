@@ -1,9 +1,8 @@
-package com.vladmihalcea.spring.transaction.transfer.domain;
+package com.vladmihalcea.spring.transfer.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 /**
  * @author Vlad Mihalcea
