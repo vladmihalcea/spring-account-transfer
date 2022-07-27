@@ -2,6 +2,8 @@ package com.vladmihalcea.spring.transfer;
 
 import com.vladmihalcea.spring.transfer.config.BaseTransferTransactionManagerConfiguration;
 import com.vladmihalcea.spring.transfer.domain.Account;
+import com.vladmihalcea.spring.transfer.domain.AccountHolder;
+import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
 import com.vladmihalcea.spring.transfer.service.TransferService;
 import org.junit.Before;
@@ -58,17 +60,32 @@ public class BaseTransferTransactionManagerTest {
     public void init() {
         try {
             transactionTemplate.execute((TransactionCallback<Void>) transactionStatus -> {
+                AccountHolder alice = new AccountHolder()
+                    .setId(1L)
+                    .setFirstName("Alice")
+                    .setLastName("Smith")
+                    .setCountry(Country.ROMANIA);
+
+                AccountHolder bob = new AccountHolder()
+                    .setId(2L)
+                    .setFirstName("Bob")
+                    .setLastName("Johnson")
+                    .setCountry(Country.US);
+
+                entityManager.persist(alice);
+                entityManager.persist(bob);
+
                 entityManager.persist(
                     new Account()
                         .setIban("Alice-123")
-                        .setOwner("Alice")
+                        .setHolder(alice)
                         .setBalance(10)
                 );
 
                 entityManager.persist(
                     new Account()
                         .setIban("Bob-456")
-                        .setOwner("Bob")
+                        .setHolder(bob)
                         .setBalance(0)
                 );
                 

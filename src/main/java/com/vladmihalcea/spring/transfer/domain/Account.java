@@ -1,8 +1,6 @@
 package com.vladmihalcea.spring.transfer.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * @author Vlad Mihalcea
@@ -14,12 +12,10 @@ public class Account {
     @Id
     private String iban;
 
-    private String owner;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private AccountHolder holder;
 
     private long balance;
-
-    /*@Version
-    private short version;*/
 
     public String getIban() {
         return iban;
@@ -30,12 +26,12 @@ public class Account {
         return this;
     }
 
-    public String getOwner() {
-        return owner;
+    public AccountHolder getHolder() {
+        return holder;
     }
 
-    public Account setOwner(String owner) {
-        this.owner = owner;
+    public Account setHolder(AccountHolder holder) {
+        this.holder = holder;
         return this;
     }
 

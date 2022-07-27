@@ -1,5 +1,7 @@
 package com.vladmihalcea.spring.transfer.service;
 
+import com.vladmihalcea.spring.transfer.domain.Account;
+import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
 import com.vladmihalcea.spring.util.UserRequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +23,20 @@ public class TransferServiceImpl implements TransferService {
     @Override
     @Transactional
     public long transfer(String fromIban, String toIban, long cents) {
-        long fromBalance = accountRepository.getBalance(fromIban);
+        Account fromAccount = accountRepository.findByIbanWithHolder(fromIban);
 
-        //Call external service
-        geoLocationService.resolveCountry(UserRequestContext.getIpAddress());
+        Country requestCountry = geoLocationService.resolveCountry(UserRequestContext.getIpAddress());
+        if(requestCountry != null && requestCountry != fromAccount.getHolder().getCountry()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "The account holder is from [%s], but the request comes from [%s]",
+                    fromAccount.getHolder().getCountry(),
+                    requestCountry
+                )
+            );
+        }
+
+        long fromBalance = fromAccount.getBalance();
 
         if (fromBalance >= cents) {
             accountRepository.setBalance(fromIban, Math.negateExact(cents));

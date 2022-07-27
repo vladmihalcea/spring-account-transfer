@@ -15,6 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface AccountRepository extends JpaRepository<Account, String> {
 
+    @Query("select a from Account a join fetch a.holder where iban = :iban")
+    Account findByIbanWithHolder(@Param("iban") String iban);
+
     @Query("select balance from Account where iban = :iban")
     long getBalance(@Param("iban") String iban);
 
