@@ -18,19 +18,14 @@ public class TransferServiceImpl implements TransferService {
     @Override
     @Transactional
     public long transfer(String fromIban, String toIban, long cents) {
-        boolean status = true;
-
-        Account fromAccount = accountRepository.findById(fromIban).get();
-        Account toAccount = accountRepository.findById(toIban).get();
-
-        long fromBalance = fromAccount.getBalance();
+        long fromBalance = accountRepository.getBalance(fromIban);
 
         if(fromBalance >= cents) {
-
-            fromAccount.setBalance(fromAccount.getBalance() - cents);
-            toAccount.setBalance(toAccount.getBalance() + cents);
+            accountRepository.setBalance(fromIban, Math.negateExact(cents));
+            accountRepository.setBalance(toIban, cents);
         }
 
-        return fromAccount.getBalance();
+        long availableFromBalance = accountRepository.getBalance(fromIban);
+        return availableFromBalance;
     }
 }
