@@ -5,6 +5,7 @@ import com.vladmihalcea.spring.transfer.domain.Account;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
 import com.vladmihalcea.spring.transfer.service.TransferService;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -80,6 +81,7 @@ public class BaseTransferTransactionManagerTest {
     }
 
     @Test
+    @Ignore
     public void testSerialExecution() {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
@@ -104,6 +106,7 @@ public class BaseTransferTransactionManagerTest {
     private int threadCount = 16;
 
     @Test
+    @Ignore
     public void testParallelExecution() throws InterruptedException {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
@@ -133,6 +136,7 @@ public class BaseTransferTransactionManagerTest {
     }
 
     @Test
+    @Ignore
     public void testParallelExecutionUsingExecutorService() throws InterruptedException {
 
         ExecutorService executorService = Executors.newFixedThreadPool(threadCount);
