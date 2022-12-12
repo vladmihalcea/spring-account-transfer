@@ -4,7 +4,7 @@ import com.vladmihalcea.spring.util.UserRequestContext;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.*;
+import jakarta.servlet.*;
 import java.io.IOException;
 
 /**

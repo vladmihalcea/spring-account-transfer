@@ -1,6 +1,6 @@
 package com.vladmihalcea.spring.transfer.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * @author Vlad Mihalcea

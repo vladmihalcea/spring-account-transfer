@@ -10,15 +10,14 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.2</version>
+        <version>3.0.0</version>
     </parent>
     <name>spring-account-transfer</name>
 
     <properties>
-        <jdk.version>11</jdk.version>
+        <jdk.version>17</jdk.version>
 
         <!-- Generic properties -->
-        <java.version>1.8</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -30,8 +29,8 @@
 
         <jacoco.version>0.8.2</jacoco.version>
 
-        <postgresql.version>42.2.1</postgresql.version>
-        <hibernate.version>5.6.10.Final</hibernate.version>
+        <postgresql.version>42.3.3</postgresql.version>
+        <hibernate.version>6.1.5.Final</hibernate.version>
 
         <datasource-proxy-spring-boot-starter.version>1.7.1</datasource-proxy-spring-boot-starter.version>
 
@@ -79,14 +78,14 @@
         </dependency>
 
         <!-- caching -->
-        <dependency>
+        <!--<dependency>
             <groupId>javax.cache</groupId>
             <artifactId>cache-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!-- webjars -->
         <dependency>

@@ -21,8 +21,8 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -94,11 +94,10 @@ public class BaseTransferTransactionManagerTest {
         } catch (TransactionException e) {
             LOGGER.error("Failure", e);
         }
-
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void testSerialExecution() {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
@@ -123,7 +122,7 @@ public class BaseTransferTransactionManagerTest {
     private int threadCount = 16;
 
     @Test
-    @Ignore
+    //@Ignore
     public void testParallelExecution() throws InterruptedException {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
@@ -153,7 +152,7 @@ public class BaseTransferTransactionManagerTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void testParallelExecutionUsingExecutorService() throws InterruptedException {
 
         ExecutorService executorService = Executors.newFixedThreadPool(threadCount);

@@ -1,6 +1,6 @@
 package com.vladmihalcea.spring.util;
 
-import javax.servlet.ServletRequest;
+import jakarta.servlet.ServletRequest;
 
 /**
  * The {@link UserRequestContext} stores the current client-specific timezone

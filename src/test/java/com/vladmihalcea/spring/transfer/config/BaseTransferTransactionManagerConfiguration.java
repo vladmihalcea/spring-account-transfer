@@ -18,7 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import javax.persistence.EntityManagerFactory;
+import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -30,7 +30,7 @@ import java.util.Properties;
 @PropertySource({"/META-INF/jdbc-postgresql.properties"})
 @ComponentScan(
     basePackages = {
-        "com.vladmihalcea.spring.transfer.service",
+        "com.vladmihalcea.spring.transfer",
     }
 )
 @EnableJpaRepositories("com.vladmihalcea.spring.transfer.repository")

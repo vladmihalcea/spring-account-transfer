@@ -2,7 +2,7 @@ package com.vladmihalcea.spring.transfer.domain;
 
 import com.vladmihalcea.spring.transfer.model.Country;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * @author Vlad Mihalcea
