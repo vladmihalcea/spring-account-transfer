@@ -36,7 +36,7 @@ import java.util.Properties;
 @EnableJpaRepositories("com.vladmihalcea.spring.transfer.repository")
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
-public class BaseTransferTransactionManagerConfiguration {
+public class TransferServiceConfiguration {
 
     public static final String DATA_SOURCE_PROXY_NAME = "DATA_SOURCE_PROXY";
 

@@ -1,19 +1,16 @@
-package com.vladmihalcea.spring.transfer;
+package com.vladmihalcea.spring.transfer.service;
 
-import com.vladmihalcea.spring.transfer.config.BaseTransferTransactionManagerConfiguration;
+import com.vladmihalcea.spring.transfer.config.TransferServiceConfiguration;
 import com.vladmihalcea.spring.transfer.domain.Account;
 import com.vladmihalcea.spring.transfer.domain.AccountHolder;
 import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
-import com.vladmihalcea.spring.transfer.service.TransferService;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,9 +32,9 @@ import static org.junit.Assert.fail;
  * @author Vlad Mihalcea
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = BaseTransferTransactionManagerConfiguration.class)
+@ContextConfiguration(classes = TransferServiceConfiguration.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class BaseTransferTransactionManagerTest {
+public class TransferServiceTest {
 
     protected final Logger LOGGER = LoggerFactory.getLogger(getClass());
 
@@ -52,9 +49,6 @@ public class BaseTransferTransactionManagerTest {
 
     @PersistenceContext
     private EntityManager entityManager;
-
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
 
     @Before
     public void init() {

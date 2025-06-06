@@ -1,13 +1,14 @@
 package com.vladmihalcea.spring.transfer.service;
 
+import com.vladmihalcea.spring.transfer.domain.Account;
 import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.model.dto.GeoLocationDto;
+import com.vladmihalcea.spring.util.UserRequestContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
-import org.springframework.web.client.RestOperations;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.InetAddress;
@@ -41,6 +42,19 @@ public class GeoLocationService {
             }
         }
         return country;
+    }
+
+    public void validateAccount(Account account) {
+        Country requestCountry = resolveCountry(UserRequestContext.getIpAddress());
+        if(requestCountry != null && requestCountry != account.getHolder().getCountry()) {
+            throw new IllegalArgumentException(
+                String.format(
+                    "The account holder is from [%s], but the request comes from [%s]",
+                    account.getHolder().getCountry(),
+                    requestCountry
+                )
+            );
+        }
     }
 
     private GeoLocationDto getGeoLocation(String ipAddressValue) {
