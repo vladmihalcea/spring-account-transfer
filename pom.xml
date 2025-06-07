@@ -29,6 +29,7 @@
 
         <jacoco.version>0.8.2</jacoco.version>
 
+        <testcontainers.version>1.18.3</testcontainers.version>
         <postgresql.version>42.3.3</postgresql.version>
         <hibernate.version>6.1.5.Final</hibernate.version>
 
@@ -36,6 +37,18 @@
 
         <junit.version>4.13.1</junit.version>
     </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-bom</artifactId>
+                <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <dependencies>
         <!-- Spring and Spring Boot dependencies -->
@@ -131,6 +144,18 @@
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
             <version>${postgresql.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-utils-hibernate-60</artifactId>
+            <version>3.9.4</version>
         </dependency>
 
         <!-- Testing -->

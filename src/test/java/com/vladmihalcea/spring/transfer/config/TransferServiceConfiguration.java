@@ -1,5 +1,7 @@
 package com.vladmihalcea.spring.transfer.config;
 
+import com.vladmihalcea.spring.util.DataSourceProvider;
+import com.vladmihalcea.spring.util.Database;
 import com.vladmihalcea.spring.util.logging.InlineQueryLogEntryCreator;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
@@ -27,7 +29,7 @@ import java.util.Properties;
  * @author Vlad Mihalcea
  */
 @Configuration
-@PropertySource({"/META-INF/jdbc-postgresql.properties"})
+@PropertySource("application.properties")
 @ComponentScan(
     basePackages = {
         "com.vladmihalcea.spring.transfer",
@@ -40,38 +42,29 @@ public class TransferServiceConfiguration {
 
     public static final String DATA_SOURCE_PROXY_NAME = "DATA_SOURCE_PROXY";
 
-    @Value("${jdbc.dataSourceClassName}")
-    private String dataSourceClassName;
-
-    @Value("${jdbc.url}")
-    private String jdbcUrl;
-
-    @Value("${jdbc.username}")
-    private String jdbcUser;
-
-    @Value("${jdbc.password}")
-    private String jdbcPassword;
-
-    @Value("${hibernate.dialect}")
-    private String hibernateDialect;
+    @Value("${spring.datasource.hikari.maximum-pool-size}")
+    private int maxConnections;
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer properties() {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+    @Bean
+    public Database database() {
+        return Database.POSTGRESQL;
+    }
+
+    @Bean
+    public DataSourceProvider dataSourceProvider() {
+        return database().dataSourceProvider();
+    }
+
     @Bean(destroyMethod = "close")
     public HikariDataSource actualDataSource() {
-        Properties driverProperties = new Properties();
-        driverProperties.setProperty("url", jdbcUrl);
-        driverProperties.setProperty("user", jdbcUser);
-        driverProperties.setProperty("password", jdbcPassword);
-
-        Properties properties = new Properties();
-        properties.put("dataSourceClassName", dataSourceClassName);
-        properties.put("dataSourceProperties", driverProperties);
-        properties.setProperty("maximumPoolSize", String.valueOf(64));
-        HikariConfig hikariConfig = new HikariConfig(properties);
+        HikariConfig hikariConfig = new HikariConfig();
+        hikariConfig.setMaximumPoolSize(maxConnections);
+        hikariConfig.setDataSource(dataSourceProvider().dataSource());
         hikariConfig.setAutoCommit(false);
         return new HikariDataSource(hikariConfig);
     }
@@ -121,7 +114,7 @@ public class TransferServiceConfiguration {
 
     protected Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", hibernateDialect);
+        properties.setProperty("hibernate.dialect", dataSourceProvider().hibernateDialect());
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
         return properties;
     }

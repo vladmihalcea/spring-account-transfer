@@ -91,7 +91,6 @@ public class TransferServiceTest {
     }
 
     @Test
-    //@Ignore
     public void testSerialExecution() {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));
