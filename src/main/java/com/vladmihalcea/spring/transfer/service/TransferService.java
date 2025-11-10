@@ -28,4 +28,19 @@ public class TransferService {
 
         return accountRepository.getBalance(fromIban);
     }
+
+    //Optimistic locking version
+    /*@Transactional
+    public long transfer(String fromIban, String toIban, long cents) {
+        Account fromAccount = accountRepository.findByIbanWithHolder(fromIban);
+
+        long fromBalance = fromAccount.getBalance();
+
+        if (fromBalance >= cents) {
+            fromAccount.addToBalance(Math.negateExact(cents));
+            accountRepository.findByIbanWithHolder(toIban).addToBalance(cents);
+        }
+
+        return fromAccount.getBalance();
+    }*/
 }

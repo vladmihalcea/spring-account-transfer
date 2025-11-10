@@ -43,4 +43,9 @@ public class Account {
         this.balance = balance;
         return this;
     }
+
+    public Account addToBalance(long value) {
+        this.balance += value;
+        return this;
+    }
 }
