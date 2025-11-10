@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.0</version>
+        <version>3.5.7</version>
     </parent>
     <name>spring-account-transfer</name>
 
@@ -29,13 +29,13 @@
 
         <jacoco.version>0.8.2</jacoco.version>
 
-        <testcontainers.version>1.18.3</testcontainers.version>
+        <testcontainers.version>2.0.1</testcontainers.version>
         <postgresql.version>42.3.3</postgresql.version>
-        <hibernate.version>6.1.5.Final</hibernate.version>
+        <hibernate.version>6.6.34.Final</hibernate.version>
 
-        <datasource-proxy-spring-boot-starter.version>1.7.1</datasource-proxy-spring-boot-starter.version>
+        <datasource-proxy-spring-boot-starter.version>1.12.0</datasource-proxy-spring-boot-starter.version>
 
-        <junit.version>4.13.1</junit.version>
+        <junit.version>5.14.1</junit.version>
     </properties>
 
     <dependencyManagement>
@@ -85,8 +85,8 @@
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
             <scope>runtime</scope>
         </dependency>
 
@@ -148,8 +148,15 @@
 
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
+            <artifactId>testcontainers-postgresql</artifactId>
+            <version>${testcontainers.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -161,8 +168,8 @@
         <!-- Testing -->
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
@@ -209,8 +216,8 @@
                             <additionalProperties>
                                 <encoding.source>${project.build.sourceEncoding}</encoding.source>
                                 <encoding.reporting>${project.reporting.outputEncoding}</encoding.reporting>
-                                <java.source>${maven.compiler.source}</java.source>
-                                <java.target>${maven.compiler.target}</java.target>
+                                <java.source>${jdk.version}</java.source>
+                                <java.target>${jdk.version}</java.target>
                             </additionalProperties>
                         </configuration>
                     </execution>
@@ -229,6 +236,11 @@
 
     <repositories>
         <repository>
+            <id>MVN</id>
+            <name>MVN Central Repository</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+       <!-- <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
@@ -243,7 +255,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
+        </repository>-->
     </repositories>
 
     <pluginRepositories>
