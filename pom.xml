@@ -236,11 +236,6 @@
 
     <repositories>
         <repository>
-            <id>MVN</id>
-            <name>MVN Central Repository</name>
-            <url>https://repo1.maven.org/maven2/</url>
-        </repository>
-       <!-- <repository>
             <id>spring-snapshots</id>
             <name>Spring Snapshots</name>
             <url>https://repo.spring.io/snapshot</url>
@@ -255,7 +250,7 @@
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>-->
+        </repository>
     </repositories>
 
     <pluginRepositories>

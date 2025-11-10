@@ -6,7 +6,10 @@ import com.vladmihalcea.spring.transfer.domain.AccountHolder;
 import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceUnit;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,8 +51,15 @@ public class TransferServiceTest {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @PersistenceUnit
+    private EntityManagerFactory entityManagerFactory;
+
     @BeforeEach
     public void init() {
+        entityManagerFactory.unwrap(SessionFactoryImplementor.class)
+            .getSchemaManager()
+            .truncateMappedObjects();
+
         try {
             transactionTemplate.execute((TransactionCallback<Void>) transactionStatus -> {
                 AccountHolder alice = new AccountHolder()
@@ -113,7 +123,6 @@ public class TransferServiceTest {
     private int threadCount = 16;
 
     @Test
-    //@Ignore
     public void testParallelExecution() throws InterruptedException {
         assertEquals(10L, accountRepository.getBalance("Alice-123"));
         assertEquals(0L, accountRepository.getBalance("Bob-456"));

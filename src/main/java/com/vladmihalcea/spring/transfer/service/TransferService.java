@@ -12,8 +12,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class TransferService {
 
-    @Autowired
-    private AccountRepository accountRepository;
+    private final AccountRepository accountRepository;
+
+    public TransferService(AccountRepository accountRepository) {
+        this.accountRepository = accountRepository;
+    }
 
     @Transactional
     public long transfer(String fromIban, String toIban, long cents) {
