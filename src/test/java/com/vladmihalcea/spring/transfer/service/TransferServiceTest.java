@@ -57,45 +57,40 @@ public class TransferServiceTest {
     @BeforeEach
     public void init() {
         entityManagerFactory.unwrap(SessionFactoryImplementor.class)
-            .getSchemaManager()
-            .truncateMappedObjects();
+            .getSchemaManager().truncateMappedObjects();
 
-        try {
-            transactionTemplate.execute((TransactionCallback<Void>) transactionStatus -> {
-                AccountHolder alice = new AccountHolder()
-                    .setId(1L)
-                    .setFirstName("Alice")
-                    .setLastName("Smith")
-                    .setCountry(Country.ROMANIA);
+        transactionTemplate.execute((TransactionCallback<Void>) transactionStatus -> {
+            AccountHolder alice = new AccountHolder()
+                .setId(1L)
+                .setFirstName("Alice")
+                .setLastName("Smith")
+                .setCountry(Country.ROMANIA);
 
-                AccountHolder bob = new AccountHolder()
-                    .setId(2L)
-                    .setFirstName("Bob")
-                    .setLastName("Johnson")
-                    .setCountry(Country.US);
+            AccountHolder bob = new AccountHolder()
+                .setId(2L)
+                .setFirstName("Bob")
+                .setLastName("Johnson")
+                .setCountry(Country.US);
 
-                entityManager.persist(alice);
-                entityManager.persist(bob);
+            entityManager.persist(alice);
+            entityManager.persist(bob);
 
-                entityManager.persist(
-                    new Account()
-                        .setIban("Alice-123")
-                        .setHolder(alice)
-                        .setBalance(10)
-                );
+            entityManager.persist(
+                new Account()
+                    .setIban("Alice-123")
+                    .setHolder(alice)
+                    .setBalance(10)
+            );
 
-                entityManager.persist(
-                    new Account()
-                        .setIban("Bob-456")
-                        .setHolder(bob)
-                        .setBalance(0)
-                );
-                
-                return null;
-            });
-        } catch (TransactionException e) {
-            LOGGER.error("Failure", e);
-        }
+            entityManager.persist(
+                new Account()
+                    .setIban("Bob-456")
+                    .setHolder(bob)
+                    .setBalance(0)
+            );
+
+            return null;
+        });
     }
 
     @Test
