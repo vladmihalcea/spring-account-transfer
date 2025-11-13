@@ -5,6 +5,7 @@ import com.vladmihalcea.spring.util.Database;
 import com.vladmihalcea.spring.util.logging.InlineQueryLogEntryCreator;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import jakarta.persistence.EntityManagerFactory;
 import net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -20,7 +21,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.support.TransactionTemplate;
 
-import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 

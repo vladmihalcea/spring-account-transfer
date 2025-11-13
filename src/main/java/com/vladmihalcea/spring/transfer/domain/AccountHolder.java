@@ -1,7 +1,6 @@
 package com.vladmihalcea.spring.transfer.domain;
 
 import com.vladmihalcea.spring.transfer.model.Country;
-
 import jakarta.persistence.*;
 
 /**

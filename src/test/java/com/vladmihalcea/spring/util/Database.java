@@ -2,7 +2,8 @@ package com.vladmihalcea.spring.util;
 
 import io.hypersistence.utils.common.ReflectionUtils;
 import org.hibernate.dialect.Dialect;
-import org.testcontainers.containers.*;
+import org.testcontainers.containers.JdbcDatabaseContainer;
+import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.util.Collections;
 
