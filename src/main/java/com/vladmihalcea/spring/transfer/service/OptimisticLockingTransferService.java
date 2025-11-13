@@ -2,7 +2,6 @@ package com.vladmihalcea.spring.transfer.service;
 
 import com.vladmihalcea.spring.transfer.domain.Account;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,11 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Vlad Mihalcea
  */
 @Service
-public class TransferService {
+public class OptimisticLockingTransferService {
 
     private final AccountRepository accountRepository;
 
-    public TransferService(AccountRepository accountRepository) {
+    public OptimisticLockingTransferService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
 
@@ -25,10 +24,10 @@ public class TransferService {
         long fromBalance = fromAccount.getBalance();
 
         if (fromBalance >= cents) {
-            accountRepository.setBalance(fromIban, Math.negateExact(cents));
-            accountRepository.setBalance(toIban, cents);
+            fromAccount.addToBalance(Math.negateExact(cents));
+            accountRepository.findByIbanWithHolder(toIban).addToBalance(cents);
         }
 
-        return accountRepository.getBalance(fromIban);
+        return fromAccount.getBalance();
     }
 }
