@@ -5,6 +5,9 @@ import com.vladmihalcea.spring.transfer.domain.Account;
 import com.vladmihalcea.spring.transfer.domain.AccountHolder;
 import com.vladmihalcea.spring.transfer.model.Country;
 import com.vladmihalcea.spring.transfer.repository.AccountRepository;
+import io.hypersistence.optimizer.HypersistenceOptimizer;
+import io.hypersistence.optimizer.core.config.JpaConfig;
+import io.hypersistence.optimizer.core.event.Event;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.PersistenceContext;
@@ -90,6 +93,20 @@ public class TransferServiceTest {
 
             return null;
         });
+    }
+
+    @Test
+    public void validateHibernate() {
+        HypersistenceOptimizer optimizer = new HypersistenceOptimizer(
+            new JpaConfig(
+                entityManagerFactory
+            )
+                .setEventFilter(event -> {
+                    return event.getPriority() == Event.Priority.BLOCKER;
+                })
+        );
+        List<Event> optimizationTips = optimizer.getEvents();
+        assertEquals(0, optimizationTips.size());
     }
 
     @Test

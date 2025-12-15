@@ -10,7 +10,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.7</version>
+        <version>4.0.0</version>
     </parent>
     <name>spring-account-transfer</name>
 
@@ -31,11 +31,12 @@
 
         <testcontainers.version>2.0.1</testcontainers.version>
         <postgresql.version>42.3.3</postgresql.version>
-        <hibernate.version>6.6.34.Final</hibernate.version>
 
-        <datasource-proxy-spring-boot-starter.version>1.12.0</datasource-proxy-spring-boot-starter.version>
+        <datasource-proxy-spring-boot-starter.version>2.0.0</datasource-proxy-spring-boot-starter.version>
 
-        <junit.version>5.14.1</junit.version>
+        <junit.version>6.0.1</junit.version>
+
+        <hypersistence-utils-hibernate-71>3.13.3</hypersistence-utils-hibernate-71>
     </properties>
 
     <dependencyManagement>
@@ -129,12 +130,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
-            <version>${hibernate.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.gavlyukovskiy</groupId>
             <artifactId>datasource-proxy-spring-boot-starter</artifactId>
             <version>${datasource-proxy-spring-boot-starter.version}</version>
@@ -161,15 +156,40 @@
 
         <dependency>
             <groupId>io.hypersistence</groupId>
-            <artifactId>hypersistence-utils-hibernate-60</artifactId>
-            <version>3.9.4</version>
+            <artifactId>hypersistence-utils-hibernate-71</artifactId>
+            <version>${hypersistence-utils-hibernate-71}</version>
         </dependency>
 
         <!-- Testing -->
 
+        <!--<dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>-->
+
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.platform</groupId>
+            <artifactId>junit-platform-launcher</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
@@ -179,6 +199,13 @@
             <artifactId>spring-test</artifactId>
             <type>jar</type>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.hypersistence</groupId>
+            <artifactId>hypersistence-optimizer</artifactId>
+            <version>2.13.0</version>
+            <classifier>jakarta</classifier>
         </dependency>
 
     </dependencies>

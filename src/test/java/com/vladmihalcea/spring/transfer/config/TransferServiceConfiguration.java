@@ -8,6 +8,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
 import net.ttddyy.dsproxy.listener.logging.SLF4JQueryLoggingListener;
 import net.ttddyy.dsproxy.support.ProxyDataSourceBuilder;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
@@ -116,6 +117,7 @@ public class TransferServiceConfiguration {
         Properties properties = new Properties();
         properties.setProperty("hibernate.dialect", dataSourceProvider().hibernateDialect());
         properties.setProperty("hibernate.hbm2ddl.auto", "create-drop");
+        properties.setProperty(AvailableSettings.IN_CLAUSE_PARAMETER_PADDING, "true");
         return properties;
     }
 
